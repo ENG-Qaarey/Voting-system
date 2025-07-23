@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Somali Presidential Election</title>
+    <link rel="icon" href="logo.jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="results.js"></script> <!-- Results JS file -->
+</head>
+<body class="bg-blue-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-700 text-white fixed w-full top-0 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <img class="h-10 w-auto" src="logo.jpeg" alt="Somali Election">
+                    <span class="ml-3 text-xl font-bold">Somali Elections</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-gray-300">Home</a>
+                    <a href="about.html" class="text-yellow-300 font-semibold">About</a>
+                    <a href="vote.html"  class="hover:text-gray-300">Vote</a>
+                    <a href="results.html"  class="hover:text-gray-300">Results</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden focus:outline-none">
+                    <svg id="menu-icon" class="h-8 w-8 text-white transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden bg-blue-700 text-white">
+            <a href="index.html" class="block px-4 py-2">Home</a>
+            <a href="about.html" class="block px-4 py-2 text-yellow-300 font-semibold">About</a>
+            <a href="vote.html" class="block px-4 py-2">Vote</a>
+            <a href="results.html"  class="block px-4 py-2">Results</a>
+        </div>
+    </nav><br><br>
+
+    <script>
+        // Toggle Mobile Menu and Change Icon
+        document.getElementById("menu-btn").addEventListener("click", function() {
+            let menu = document.getElementById("mobile-menu");
+            let icon = document.getElementById("menu-icon");
+
+            menu.classList.toggle("hidden");
+
+            if (!menu.classList.contains("hidden")) {
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>`; // X Icon
+            } else {
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`; // Hamburger Icon
+            }
+        });
+
+        // Function to check registration before allowing navigation
+        function checkRegistration(page) {
+            let isRegistered = localStorage.getItem("hasRegistered");
+
+            if (isRegistered === "true") {
+                window.location.href = page; // Allow navigation
+            } else {
+                alert("Please register before accessing this page!");
+                window.location.href = "register.html"; // Redirect to register page
+            }
+        }
+    </script>
+
+    <div class="max-w-4xl mx-auto p-8">
+        <div class="bg-white shadow-lg p-6 rounded-lg mb-8 text-center">
+            <h2 class="text-3xl font-bold text-blue-600">Voting Results</h2>
+        </div>
+
+        <!-- Results Section -->
+        <div class="bg-white shadow-lg p-6 rounded-lg flex items-center space-x-4 mb-4">
+            <img id="imgA" src="hassan.jpeg" alt="Candidate A" class="w-24 h-24 object-cover rounded-full border-4 border-blue-500">
+            <div>
+                <h3 class="text-xl font-semibold text-blue-700" id="nameA">hasaan sheikh maxmuud</h3>
+                <p class="text-lg text-gray-700" id="votesA">Votes: 0</p>
+            </div>
+        </div>
+        
+        <div class="bg-white shadow-lg p-6 rounded-lg flex items-center space-x-4 mb-4">
+            <img id="imgB" src="farmaajo.jpeg" alt="Candidate B" class="w-24 h-24 object-cover rounded-full border-4 border-blue-500">
+            <div>
+                <h3 class="text-xl font-semibold text-blue-700" id="nameB">maxamed c/laahi farmaajo</h3>
+                <p class="text-lg text-gray-700" id="votesB">Votes: 0</p>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-lg p-6 rounded-lg flex items-center space-x-4">
+            <img id="imgC" src="shariif.jpeg" alt="Candidate C" class="w-24 h-24 object-cover rounded-full border-4 border-blue-500">
+            <div>
+                <h3 class="text-xl font-semibold text-blue-700" id="nameC">shariif sheikh Axmed</h3>
+                <p class="text-lg text-gray-700" id="votesC">Votes: 0</p>
+            </div>
+        </div><br>
+
+        <div class="bg-white shadow-lg p-6 rounded-lg flex items-center space-x-4">
+            <img id="imgD" src="Qoor Qoor.jpeg" alt="Candidate D" class="w-24 h-24 object-cover rounded-full border-4 border-blue-500">
+            <div>
+                <h3 class="text-xl font-semibold text-blue-700" id="nameD">Qoor Qoor</h3>
+                <p class="text-lg text-gray-700" id="votesD">Votes: 0</p>
+            </div>
+        </div><br>
+
+        
+
+        <!-- Go Back Button -->
+        <div class="text-center mt-8">
+            <button onclick="window.location.href='vote.html'" class="bg-gray-600 text-white p-3 rounded-lg hover:bg-gray-700">
+                Go Back to Vote
+            </button>
+        </div>
+         <!-- Go Back Button -->
+         <div class="text-center mt-8">
+            <button onclick="window.location.href='index.html'" class="bg-blue-600 text-white p-3 rounded-lg hover:bg-gray-700">
+                Go Back
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let votes = JSON.parse(localStorage.getItem("votes")) || {};
+
+            document.getElementById("votesA").textContent = `Votes: ${votes["Candidate A"] || 0}`;
+            document.getElementById("votesB").textContent = `Votes: ${votes["Candidate B"] || 0}`;
+            document.getElementById("votesC").textContent = `Votes: ${votes["Candidate C"] || 0}`;
+            document.getElementById("votesD").textContent = `Votes: ${votes["Candidate D"] || 0}`;
+        });
+    </script>
+
+</body>
+</html>

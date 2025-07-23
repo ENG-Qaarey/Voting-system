@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Somali Voting</title>
+    <link rel="icon" href="logo.jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 -->
+    <style>
+        .error { border: 2px solid red; } /* Highlight invalid fields in red */
+    </style>
+</head>
+<body class="bg-blue-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-700 text-white fixed w-full top-0 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <img class="h-10 w-auto" src="logo.jpeg" alt="Somali Election">
+                    <span class="ml-3 text-xl font-bold">Somali Elections</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-gray-300">Home</a>
+                    <a href="about.html" class="text-yellow-300 font-semibold">About</a>
+                    <a href="#" onclick="checkRegistration('vote.html')" class="hover:text-gray-300">Vote</a>
+                    <a href="#" onclick="checkRegistration('results.html')" class="hover:text-gray-300">Results</a>
+                </div>
+                <button id="menu-btn" class="md:hidden focus:outline-none">
+                    <svg id="menu-icon" class="h-8 w-8 text-white transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <br><br><br>
+
+    <center>
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-xl font-bold text-center text-blue-700">Voter Registration</h2>
+
+            <form id="registerForm" class="mt-4">
+                <input type="text" id="fullName" placeholder="Full Name" class="w-full p-3 border rounded mt-2" oninput="validateName(this)">
+                <input type="date" id="dob" class="w-full p-3 border rounded mt-2">
+                <input type="number" id="passport" placeholder="Passport Number" class="w-full p-3 border rounded mt-2" oninput="validateNumeric(this)">
+                <input type="number" id="citizenship" placeholder="Citizenship ID" class="w-full p-3 border rounded mt-2" oninput="validateNumeric(this)">
+                <input type="email" id="email" placeholder="Email" class="w-full p-3 border rounded mt-2">
+
+                <div class="relative mt-2">
+                    <input type="password" id="password" placeholder="Password (Min 6 chars)" class="w-full p-3 border rounded pr-10">
+                    <span id="togglePassword"  class="absolute inset-y-0 right-3 flex items-center cursor-pointer">👁️</span>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded mt-4 hover:bg-blue-700">
+                    Register
+                </button>
+            </form>
+            
+            <p class="text-sm text-center mt-4">Already registered? 
+                <a href="login.html" class="text-blue-600 hover:underline">Login here</a>
+            </p>
+        </div>
+    </center>
+
+    <br><br><br>
+
+    <script>
+        // Validate Full Name (only alphabetic characters)
+        function validateName(input) {
+            input.value = input.value.replace(/[^a-zA-Z\s]/g, '');  // Allow only letters and spaces
+        }
+
+        // Validate Passport and Citizenship ID (only numbers)
+        function validateNumeric(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');  // Allow only numbers
+        }
+
+        // Registration form validation
+        document.getElementById("registerForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let fullName = document.getElementById("fullName").value.trim();
+            let dob = document.getElementById("dob").value.trim();
+            let passport = document.getElementById("passport").value.trim();
+            let citizenship = document.getElementById("citizenship").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            let valid = true;
+
+            // Remove previous error styles
+            document.querySelectorAll("input").forEach(input => input.classList.remove("error"));
+
+            // Validation
+            if (!fullName) {
+                document.getElementById("fullName").classList.add("error");
+                valid = false;
+            }
+            if (!dob) {
+                document.getElementById("dob").classList.add("error");
+                valid = false;
+            }
+            if (!passport) {
+                document.getElementById("passport").classList.add("error");
+                valid = false;
+            }
+            if (!citizenship) {
+                document.getElementById("citizenship").classList.add("error");
+                valid = false;
+            }
+            if (!email) {
+                document.getElementById("email").classList.add("error");
+                valid = false;
+            }
+            if (!password || password.length < 6) {
+                document.getElementById("password").classList.add("error");
+                valid = false;
+            }
+
+            // Calculate Age
+            let birthDate = new Date(dob);
+            let age = new Date().getFullYear() - birthDate.getFullYear();
+            let monthDiff = new Date().getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && new Date().getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            if (age < 18) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Underage!",
+                    text: "You must be 18 or older to register and vote.",
+                    confirmButtonColor: "#d33"
+                });
+                return;
+            }
+
+            if (!valid) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Validation Error",
+                    text: "Please fill in all fields correctly!",
+                    confirmButtonColor: "#d33"
+                });
+                return;
+            }
+
+            // Check if user already exists
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            if (users.some(user => user.passport === passport)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Duplicate Entry",
+                    text: "A user with this passport already exists!",
+                    confirmButtonColor: "#d33"
+                });
+                return;
+            }
+
+            // Save user data
+            users.push({ fullName, dob, passport, citizenship, email, password, hasVoted: false });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            Swal.fire({
+                icon: "success",
+                title: "Registration Successful!",
+                text: "Please login to continue.",
+                confirmButtonColor: "#3085d6"
+            }).then(() => {
+                window.location.href = "login.html";
+            });
+        });
+
+        // Password show/hide functionality
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            let passwordInput = document.getElementById("password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                this.textContent = "🙈";
+            } else {
+                passwordInput.type = "password";
+                this.textContent = "👁️";
+            }
+        });
+    </script>
+</body>
+</html>

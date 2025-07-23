@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Somali Presidential Election</title>
+    <link rel="icon" href="logo.jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-700 text-white fixed w-full top-0 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <img class="h-10 w-auto" src="logo.jpeg" alt="Somali Election">
+                    <span class="ml-3 text-xl font-bold">Somali Elections</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-gray-300">Home</a>
+                    <a href="vote.html" class="hover:text-gray-300">Vote</a>
+                    <a href="results.html" class="hover:text-gray-300">Results</a>
+                    <a href="about.html" class="text-yellow-300 font-semibold">About</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden focus:outline-none">
+                    <svg id="menu-icon" class="h-8 w-8 text-white transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden bg-blue-700 text-white">
+            <a href="index.html" class="block px-4 py-2">Home</a>
+            <a href="vote.html" class="block px-4 py-2">Vote</a>
+            <a href="results.html" class="block px-4 py-2">Results</a>
+            <a href="about.html" class="block px-4 py-2 text-yellow-300 font-semibold">About</a>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <div class="max-w-5xl mx-auto mt-24 p-8 bg-white shadow-lg rounded-lg">
+        <h2 class="text-3xl font-bold text-center text-blue-700" id="about">About Somali Presidential Election</h2>
+        <p class="text-gray-700 text-center mt-2">Everything you need to know about the voting system.</p>
+
+        <!-- Election History -->
+        <div class="mt-8">
+            <h3 class="text-2xl font-semibold text-blue-600">📜 Election History</h3>
+            <p class="text-gray-700 mt-2 leading-relaxed">
+                The Somali Presidential election is one of the most crucial democratic processes in Somalia. The elections allow the people to choose their leader through a fair and transparent system.
+            </p>
+        </div>
+
+        <!-- How Voting Works -->
+        <div class="mt-6">
+            <h3 class="text-2xl font-semibold text-blue-600">🗳️ How Voting Works?</h3>
+            <ul class="list-disc ml-6 mt-2 text-gray-700 leading-relaxed">
+                <li>Citizens register using a Somali passport or citizenship ID.</li>
+                <li>After registration, they can log in and vote for one presidential candidate.</li>
+                <li>Once a vote is cast, it is recorded in the system, and the voter cannot vote again.</li>
+                <li>Results are displayed showing the votes for each candidate.</li>
+            </ul>
+        </div>
+
+        <!-- Election Goals -->
+        <div class="mt-6">
+            <h3 class="text-2xl font-semibold text-blue-600">🎯 Our Goals</h3>
+            <ul class="list-disc ml-6 mt-2 text-gray-700 leading-relaxed">
+                <li>Ensure **fair and transparent elections** for all Somali citizens.</li>
+                <li>Prevent **duplicate voting** and ensure vote integrity.</li>
+                <li>Provide **real-time results** in a clear and accessible way.</li>
+                <li>Encourage **civic participation** and democracy in Somalia.</li>
+            </ul>
+        </div>
+
+        <!-- Contact & More Info -->
+        <div class="mt-8 text-center">
+            <a href="#about" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-all">
+                📞 Contact Us
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Mobile Menu and Change Icon
+        document.getElementById("menu-btn").addEventListener("click", function() {
+            let menu = document.getElementById("mobile-menu");
+            let icon = document.getElementById("menu-icon");
+
+            menu.classList.toggle("hidden");
+
+            if (!menu.classList.contains("hidden")) {
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>`; // X Icon
+            } else {
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`; // Hamburger Icon
+            }
+        });
+    </script>
+
+</body>
+</html>

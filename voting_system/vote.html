@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote - Somali Presidential Election</title>
+    <link rel="icon" href="logo.jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="vote.js"></script>
+</head>
+<body class="bg-gray-100">
+
+      <!-- Navbar -->
+    <nav class="bg-blue-700 navbar text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-10 w-auto" src="logo.jpeg" alt="Somali Election">
+                        <span class="ml-3 text-xl font-bold">Somali Elections</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="hover:bg-blue-560 px-3 py-2 rounded-md text-lg">Home</a>
+                    <a href="vote.html"  class="hover:bg-blue-560 px-3 py-2 rounded-md text-lg">Vote</a>
+                    <a href="results.html"  class="hover:bg-blue-560 px-3 py-2 rounded-md text-lg">Results</a>
+                    <a href="#"  class="hover:bg-blue-560 px-3 py-2 rounded-md text-lg">About</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-white focus:outline-none">
+                        <svg id="menu-icon" class="h-8 w-8 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-blue-700">
+            <a href="index.html" class="block px-4 py-2">Home</a>
+            <a href="vote.html"  class="block px-4 py-2">Vote</a>
+            <a href="results.html"  class="block px-4 py-2">Results</a>
+            <a href="#" class="block px-4 py-2">About</a>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto p-8">
+        <div class="bg-white shadow-lg p-6 rounded-lg mb-8 text-center">
+            <h2 class="text-3xl font-bold text-blue-600">Somali Presidential Election</h2>
+            <p class="text-lg mt-2 text-gray-700">Please select one candidate to vote for</p>
+        </div>
+
+        <!-- Voting Section -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Candidate A -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden text-center p-4">
+                <img src="hassan.jpeg" alt="Candidate A" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-blue-500">
+                <h3 class="text-xl font-semibold text-blue-700 mt-3">Hassan sheik</h3>
+                <p class="text-sm text-gray-500">Former Minister</p>
+                <button class="w-full bg-blue-600 text-white p-2 rounded mt-4 vote-btn" data-candidate="Candidate A">
+                    Vote for Hassan sheik
+                </button>
+            </div>
+
+            <!-- Candidate B -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden text-center p-4">
+                <img src="farmaajo.jpeg" alt="Candidate B" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-blue-500">
+                <h3 class="text-xl font-semibold text-blue-700 mt-3">maxamed c/laahi farmaajo</h3>
+                <p class="text-sm text-gray-500">Business Leader</p>
+                <button class="w-full bg-blue-600 text-white p-2 rounded mt-4 vote-btn" data-candidate="Candidate B">
+                    Vote for maxamed c/laahi farmaajo
+                </button>
+            </div>
+
+            <!-- Candidate C -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden text-center p-4">
+                <img src="shariif.jpeg" alt="Candidate C" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-blue-500">
+                <h3 class="text-xl font-semibold text-blue-700 mt-3">shariif Sheikh Axmed</h3>
+                <p class="text-sm text-gray-500">Former President</p>
+                <button class="w-full bg-blue-600 text-white p-2 rounded mt-4 vote-btn" data-candidate="Candidate C">
+                    Vote for shariif Sheikh Axmed
+                </button>
+            </div>
+
+            <!-- Candidate D -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden text-center p-4">
+                <img src="Qoor Qoor.jpeg" alt="Candidate D" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-blue-500">
+                <h3 class="text-xl font-semibold text-blue-700 mt-3">Qoor Qoor</h3>
+                <p class="text-sm text-gray-500">Former President</p>
+                <button class="w-full bg-blue-600 text-white p-2 rounded mt-4 vote-btn" data-candidate="Candidate D">
+                    Vote for Qoor Qoor
+                </button>
+            </div>
+        </div>
+
+        <!-- Next Button (Result Page) -->
+        <div class="text-center mt-8">
+            <button id="resultBtn" class="bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
+                See Voting Results
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Alert Modal -->
+    <div id="fancy-alert" class="hidden fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-700 bg-opacity-50">
+        <div class="bg-white p-6 rounded-lg text-center max-w-sm">
+            <h3 id="fancy-alert-title" class="text-xl font-semibold text-blue-600"></h3>
+            <p id="fancy-alert-message" class="text-gray-700 mt-2"></p>
+            <button id="fancy-alert-ok" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Okay</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+        
+    </script>
+
+    <script>
+        class Election {
+            constructor() {
+                this.voters = JSON.parse(localStorage.getItem("users")) || [];
+                this.votes = JSON.parse(localStorage.getItem("votes")) || {};
+            }
+    
+            showAlert(title, message, type) {
+                Swal.fire({
+                    title: title,
+                    text: message,
+                    icon: type,  // 'success', 'error', 'warning', 'info'
+                    confirmButtonColor: '#3085d6',
+                    background: '#fff',
+                    customClass: {
+                        title: 'font-bold text-lg text-blue-600', // Customize title style
+                        content: 'text-md text-gray-700', // Customize content style
+                        confirmButton: 'bg-blue-600 text-white rounded px-6 py-2' // Customize button style
+                    },
+                    showConfirmButton: true
+                });
+            }
+    
+            vote(candidate, loggedInUser) {
+                if (loggedInUser.hasVoted) {
+                    this.showAlert("Already Voted", "You have already voted!", 'error');
+                    setTimeout(() => window.location.href = "results.html", 1500); // Redirect after alert
+                    return;
+                }
+    
+                // Increment the vote count for the selected candidate
+                this.votes[candidate] = (this.votes[candidate] || 0) + 1;
+                localStorage.setItem("votes", JSON.stringify(this.votes));
+    
+                // Mark the user as having voted
+                loggedInUser.hasVoted = true;
+                this.voters = this.voters.map(user => {
+                    if (user.passport === loggedInUser.passport) user.hasVoted = true;
+                    return user;
+                });
+                localStorage.setItem("users", JSON.stringify(this.voters));
+                localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+    
+                this.showAlert("Vote Submitted", "Your vote has been submitted successfully!", 'success');
+                setTimeout(() => window.location.href = "results.html", 1800); // Redirect after alert
+                return;
+            }
+        }
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+            if (!loggedInUser) {
+                Swal.fire({
+                    title: "Please Log In",
+                    text: "You need to log in to vote.",
+                    icon: 'warning',
+                    confirmButtonColor: '#d33',
+                    background: '#fff',
+                    customClass: {
+                        title: 'font-bold text-lg text-yellow-600',
+                        content: 'text-md text-gray-700',
+                        confirmButton: 'bg-red-600 text-white rounded px-6 py-2'
+                    }
+                }).then(() => {
+                    window.location.href = "login.html";
+                });
+                return;
+            }
+    
+            // Check if the user has already voted
+            if (loggedInUser.hasVoted) {
+                Swal.fire({
+                    title: "Already Voted",
+                    text: "You have already voted! Redirecting to results.",
+                    icon: 'info',
+                    confirmButtonColor: '#3085d6',
+                    background: '#fff',
+                    customClass: {
+                        title: 'font-bold text-lg text-blue-600',
+                        content: 'text-md text-gray-700',
+                        confirmButton: 'bg-blue-600 text-white rounded px-6 py-2'
+                    }
+                }).then(() => {
+                    window.location.href = "results.html";
+                });
+                return;
+            }
+    
+            // Event listeners for vote buttons
+            document.querySelectorAll(".vote-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    let candidate = this.getAttribute("data-candidate");
+                    let election = new Election();
+    
+                    election.vote(candidate, loggedInUser);
+                });
+            });
+    
+            // Event listener for results button
+            document.getElementById("resultBtn").addEventListener("click", function () {
+                window.location.href = "results.html";
+            });
+        });
+    </script>
+    
+
+</body>
+</html>
